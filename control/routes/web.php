@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/estudiante',function (){
+//    return "Hola estuadiante.";
+//});
+
+Route::resource('/estudiante','EstudiantesController');
+
+//Route::get('/listaEstudiantes','EstudiantesController@index');
+//Route::get('/nuevoEstudiante','EstudiantesController@create');
+
+Route::get('/admin',function (){
+	return view('admin.index');
+});
+Route::get('/saludos/{nombre?}',function ($nombre='Inserta tu nombre'){
+	return 'Hola '.$nombre;
+});

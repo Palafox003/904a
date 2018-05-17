@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    PALAFOX
                 </div>
 
                 <div class="links">
