@@ -10,4 +10,9 @@
 		<tr><td>{{$estudiante->matricula}}</td><td>{{$estudiante->nombre}} {{$estudiante->paterno}} {{$estudiante->materno}}</td><td>{{$estudiante->email}}</td><td><a class="btn btn-primary" href="estudiante/{{$estudiante->id}}/edit" role="button">Editar</a></td></tr>
 	@endforeach
 	</table>
+	<ul>
+	@foreach($ep as $e)
+		<li>{{$e->nombre}}</li>
+	@endforeach
+	</ul>
 @endsection

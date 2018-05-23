@@ -9,8 +9,16 @@
 			<h2>Nuevo Estudiante</h2>
 			<form method="post" action="{{route('estudiante.store')}}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+			 <div class="form-group">
+			    <label for="matricula">Programa:</label>
+			    <select name="programa" id="programa" class="form-control">
+			    	@foreach($programas as $programa)
+			    		<option value="{{$programa->id}}">{{$programa->nombre}}</option>
+			    	@endforeach
+			    </select>
+			  </div>
 			  <div class="form-group">
-			    <label for="matricula">Matricula</label>
+			    <label for="matricula">Matricula:</label>
 			    <input type="text" name="matricula" class="form-control" id="matricula" placeholder="Matricula">
 			  </div>
 			  <div class="form-group">
@@ -28,6 +36,10 @@
 			  <div class="form-group">
 			    <label for="email">Email:</label>
 			    <input type="text" name="email" class="form-control" id="email" placeholder="nombre@mail.com">
+			  </div>
+			  	<div class="form-group">
+			    <label for="password">Password:</label>
+			    <input type="password" name="password" class="form-control" id="password"
 			  </div>
 			  <input class="btn btn-primary" type="submit" value="Guardar">
 			</form>

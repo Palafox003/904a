@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Programa;
 use App\Estudiante;
 
 class EstudiantesController extends Controller
@@ -16,7 +18,9 @@ class EstudiantesController extends Controller
     {
         //
         $estudiantes=Estudiante::all();
-        return view('/estudiantes/estudiantes',['estudiantes'=>$estudiantes]);
+        $estudiantesPrograma=Programa::find(2)->estudiantes;
+
+        return view('/estudiantes/estudiantes',['estudiantes'=>$estudiantes,'ep'=>$estudiantesPrograma]);
     }
 
     /**
@@ -27,7 +31,10 @@ class EstudiantesController extends Controller
     public function create()
     {
         //
-        return view('estudiantes.nuevoEstudiante');
+        $programas=Programa::all();
+        $estudiantesPrograma=Programa::find(2)->estudiantes;
+        $desc=$programas->sortBy('numero');
+        return view('estudiantes.nuevoEstudiante',['programas'=>$desc,'ep'=>$estudiantesPrograma]);
     }
 
     /**
@@ -39,11 +46,23 @@ class EstudiantesController extends Controller
     public function store(Request $request)
     {
         //
-        Estudiante::create(['matricula'=>$request->matricula,
+
+        User::create([
+            'name'=>$request->nombre,
+            'email'=>$request->email,
+            'password'=>bcrypt($request->password)
+        ]);
+
+        $user=User::where('email',$request->email)->first();
+        $user_id=$user->id;
+        Estudiante::create([
+                            'matricula'=>$request->matricula,
                             'nombre'=>$request->nombre,
                             'paterno'=>$request->paterno,
                             'materno'=>$request->materno,
-                            'email'=>$request->email
+                            'email'=>$request->email,
+                            'user_id'=>$user_id,
+                            'programa_id'=>$request->programa
                             ]);
 
         $estudiantes=Estudiante::all();

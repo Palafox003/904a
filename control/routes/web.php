@@ -18,10 +18,11 @@ Route::get('/', function () {
 //    return "Hola estuadiante.";
 //});
 
+Route::prefix('estudiante')->group(function () {
+
 Route::resource('/estudiante','EstudiantesController');
 
-//Route::get('/listaEstudiantes','EstudiantesController@index');
-//Route::get('/nuevoEstudiante','EstudiantesController@create');
+});
 
 Route::get('/admin',function (){
 	return view('admin.index');
@@ -29,3 +30,7 @@ Route::get('/admin',function (){
 Route::get('/saludos/{nombre?}',function ($nombre='Inserta tu nombre'){
 	return 'Hola '.$nombre;
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
